@@ -3,6 +3,8 @@ package com.eventdanilodev.eventdev.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,14 @@ public class Participante {
     private Integer id;
     private String nome;
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "participante_atividade",
+            joinColumns = @JoinColumn(name = "participante_id"),
+            inverseJoinColumns = @JoinColumn(name = "atividade_id")
+    )
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Participante(){
     }
